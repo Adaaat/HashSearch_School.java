@@ -3,6 +3,26 @@ public class HashSuche {
     private  double[] wert= new double[11];
     private  int [] kollision = new int[11];
 
+    public int suchePos(int pSchluessel){
+
+        if(schluessel[berechneHash(pSchluessel)]==pSchluessel) {
+        return berechneHash(pSchluessel);
+    }else
+        {
+           for (int i = 0; i <= kollision[berechneHash(pSchluessel)];i++){
+
+            if (schluessel[berechneHash(pSchluessel) + i] == pSchluessel) {
+                return berechneHash(pSchluessel) + i;
+            }
+        }
+
+        }
+        return -1;
+    }
+
+
+
+
 
     public boolean arrayfull(){
         boolean temp = true;
@@ -29,10 +49,12 @@ public class HashSuche {
                 int i = 0;
                 temp= 1;
                 for (i =berechneHash(pSchluessel); schluessel[i + 1] != 0;i++) {
+                    if(i == schluessel.length - 1) {
+                        i = 0;
+                    }
+                    }
                     temp++;
-
                 }
-
                 schluessel[i + 1] = pSchluessel;
                 wert[i + 1] = pWert;
                 kollision[berechneHash(pSchluessel)] = temp ;
@@ -40,7 +62,7 @@ public class HashSuche {
             }
             return temp;
         }
-        }
+
 
 
 
