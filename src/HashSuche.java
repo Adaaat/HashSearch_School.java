@@ -13,7 +13,12 @@ public class HashSuche {
 
             if (schluessel[berechneHash(pSchluessel) + i] == pSchluessel) {
                 return berechneHash(pSchluessel) + i;
+
+
             }
+               if (i == schluessel.length - 1) {
+                   i = 0;
+               }
         }
 
         }
@@ -36,32 +41,34 @@ public class HashSuche {
         }
 
 
-    public int fuegeEin(int pSchluessel, double pWert){
+    public int fuegeEin(int pSchluessel, double pWert) {
         int temp = 0;
-        if(arrayfull()) {
+        if (arrayfull()) {
             System.out.println("Array is full");
             return 0;
-        }else {
+        } else {
             if (schluessel[berechneHash(pSchluessel)] == 0) {
                 schluessel[berechneHash(pSchluessel)] = pSchluessel;
                 wert[berechneHash(pSchluessel)] = pWert;
             } else {
                 int i = 0;
-                temp= 1;
-                for (i =berechneHash(pSchluessel); schluessel[i + 1] != 0;i++) {
-                    if(i == schluessel.length - 1) {
+                temp = 1;
+                for (i = berechneHash(pSchluessel); schluessel[i + 1] != 0; i++) {
+                    if (i == schluessel.length - 1) {
                         i = 0;
-                    }
                     }
                     temp++;
                 }
+
+
                 schluessel[i + 1] = pSchluessel;
                 wert[i + 1] = pWert;
-                kollision[berechneHash(pSchluessel)] = temp ;
+                kollision[berechneHash(pSchluessel)] = temp;
 
             }
             return temp;
         }
+    }
 
 
 
