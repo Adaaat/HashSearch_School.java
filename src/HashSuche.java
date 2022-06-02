@@ -11,14 +11,13 @@ public class HashSuche {
         {
            for (int i = 0; i <= kollision[berechneHash(pSchluessel)];i++){
 
+               if (berechneHash(pSchluessel)+i == schluessel.length - 1) {
+                   i = -berechneHash(pSchluessel);
+               }
             if (schluessel[berechneHash(pSchluessel) + i] == pSchluessel) {
                 return berechneHash(pSchluessel) + i;
-
-
             }
-               if (i == schluessel.length - 1) {
-                   i = 0;
-               }
+
         }
 
         }
@@ -53,16 +52,16 @@ public class HashSuche {
             } else {
                 int i = 0;
                 temp = 1;
-                for (i = berechneHash(pSchluessel); schluessel[i + 1] != 0; i++) {
+                for (i = berechneHash(pSchluessel); schluessel[i] != 0; i++) {
                     if (i == schluessel.length - 1) {
-                        i = 0;
+                        i = -1;
                     }
                     temp++;
                 }
 
 
-                schluessel[i + 1] = pSchluessel;
-                wert[i + 1] = pWert;
+                schluessel[i] = pSchluessel;
+                wert[i] = pWert;
                 kollision[berechneHash(pSchluessel)] = temp;
 
             }
