@@ -19,7 +19,7 @@ public class Main {
         System.out.println(Arrays.toString(test1));
         System.out.println(Arrays.toString(test2));
         System.out.println(Arrays.toString(test3));
-      System.out.println(hash.suchePos(39));
+      System.out.println(hash.suchePos(19));
 
     }
 }
