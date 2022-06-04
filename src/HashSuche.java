@@ -2,6 +2,11 @@ public class HashSuche {
     private  int[] schluessel = new int[11];
     private  double[] wert= new double[11];
     private  int [] kollision = new int[11];
+    int mod;
+
+    public HashSuche(int pMod){
+    mod = pMod;
+    }
 
     public int suchePos(int pSchluessel){
 
@@ -48,7 +53,7 @@ public class HashSuche {
         int temp = 0;
         if (arrayfull()) {
             System.out.println("Array is full");
-            return 0;
+            return -1;
         } else {
             if (schluessel[berechneHash(pSchluessel)] == 0) {
                 schluessel[berechneHash(pSchluessel)] = pSchluessel;
@@ -88,7 +93,7 @@ public class HashSuche {
         return schluessel;
     }
     public int berechneHash(int pSchlüssel) {
-        return (pSchlüssel % 10);
+        return (pSchlüssel % mod);
     }
 }
 
