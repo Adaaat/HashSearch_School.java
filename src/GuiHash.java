@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -17,13 +16,8 @@ public class GuiHash extends JFrame implements ActionListener {
     HashSuche hash = new HashSuche(10);
 
     public GuiHash() {
-        //  setContentPane(mainPanel);
-        /*setTitle("Adnan's Test");
-        setSize(450, 300);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);*/
-        JPanel mainPanel = new JPanel();
 
+        JPanel mainPanel = new JPanel();
 
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -67,23 +61,32 @@ public class GuiHash extends JFrame implements ActionListener {
         mainPanel.add(button);
 
         button.addActionListener(e -> {
-
-
             String schluessel = kText.getText();
+
             String wert = wText.getText();
             int schluessel1 = Integer.parseInt(schluessel);
             double wert1 = Double.parseDouble(wert);
-
-            if (hash.fuegeEin(schluessel1, wert1) == -1) {
-                alert.setText("Array Voll");
-            } else {
-                alert.setText("Gespeichert");
-                kText.setText("");
-                wText.setText("");
+            int[] arrayWert =   hash.getSchluessel();
+            //zusätzlicher linearer aufwand aber notwendig für eindeutige Suche
+            boolean exists = false;
+            for (int j=0;j < arrayWert.length; j++ ) {
+            if(arrayWert[j] == schluessel1){
+                exists=true;
+                alert.setText("Kundennummer existiert bereits");
+                break;
             }
-            System.out.println(Arrays.toString(hash.getSchluessel()));
-            System.out.println(Arrays.toString(hash.getWert()));
-
+            }
+            if(exists == false) {
+                if (hash.fuegeEin(schluessel1, wert1) == -1) {
+                    alert.setText("Array Voll");
+                } else {
+                    alert.setText("Gespeichert");
+                    kText.setText("");
+                    wText.setText("");
+                }
+                System.out.println(Arrays.toString(hash.getSchluessel()));
+                System.out.println(Arrays.toString(hash.getWert()));
+            }
         });
 
         alert.setBounds(10, 110, 300, 25);
@@ -105,6 +108,7 @@ public class GuiHash extends JFrame implements ActionListener {
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -1,11 +1,14 @@
 public class HashSuche {
-    private  int[] schluessel = new int[11];
-    private  double[] wert= new double[11];
-    private  int [] kollision = new int[11];
+    private  int[] schluessel;
+    private  double[] wert;
+    private  int [] kollision;
     int mod;
 
     public HashSuche(int pMod){
     mod = pMod;
+    schluessel = new int[mod];
+    wert = new double[mod];
+    kollision = new int[mod];
     }
 
     public int suchePos(int pSchluessel){
@@ -22,20 +25,11 @@ public class HashSuche {
                if (i == schluessel.length - 1) {
                    i = -1;
                }
-
-
-
                temp++;
-
         }
-
         }
         return -1;
     }
-
-
-
-
 
     public boolean arrayfull(){
         boolean temp = true;
@@ -48,7 +42,6 @@ public class HashSuche {
         return temp;
         }
 
-
     public int fuegeEin(int pSchluessel, double pWert) {
         int temp = 0;
         if (arrayfull()) {
@@ -59,36 +52,26 @@ public class HashSuche {
                 schluessel[berechneHash(pSchluessel)] = pSchluessel;
                 wert[berechneHash(pSchluessel)] = pWert;
             } else {
-                int i = 0;
-                temp = 0;
+                int i;
                 for (i = berechneHash(pSchluessel); schluessel[i] != 0; i++) {
                     if (i == schluessel.length - 1) {
                         i = -1;
                     }
                     temp++;
                 }
-
-
                 schluessel[i] = pSchluessel;
                 wert[i] = pWert;
                 kollision[berechneHash(pSchluessel)] = temp;
-
             }
             return temp;
         }
     }
-
-
-
-
     public double[] getWert(){
         return wert;
     }
-
     public int[] getKollision() {
         return kollision;
     }
-
     public int[] getSchluessel(){
         return schluessel;
     }
