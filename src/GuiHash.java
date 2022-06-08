@@ -69,14 +69,14 @@ public class GuiHash extends JFrame implements ActionListener {
             int[] arrayWert =   hash.getSchluessel();
             //zusätzlicher linearer aufwand aber notwendig für eindeutige Suche
             boolean exists = false;
-            for (int j=0;j < arrayWert.length; j++ ) {
-            if(arrayWert[j] == schluessel1){
-                exists=true;
-                alert.setText("Kundennummer existiert bereits");
-                break;
+            for (int i : arrayWert) {
+                if (i == schluessel1) {
+                    exists = true;
+                    alert.setText("Kundennummer existiert bereits");
+                    break;
+                }
             }
-            }
-            if(exists == false) {
+            if(!exists) {
                 if (hash.fuegeEin(schluessel1, wert1) == -1) {
                     alert.setText("Array Voll");
                 } else {
