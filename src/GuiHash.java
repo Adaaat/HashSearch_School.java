@@ -61,24 +61,20 @@ public class GuiHash extends JFrame implements ActionListener {
         mainPanel.add(button);
 
         button.addActionListener(e -> {
-            String schluessel = kText.getText();
+            try {
+                String schluessel = kText.getText();
+                String wert = wText.getText();
 
-            String wert = wText.getText();
             int schluessel1 = Integer.parseInt(schluessel);
             double wert1 = Double.parseDouble(wert);
             int[] arrayWert =   hash.getSchluessel();
-            //zusätzlicher linearer aufwand aber notwendig für eindeutige Suche
-            boolean exists = false;
-            for (int i : arrayWert) {
-                if (i == schluessel1) {
-                    exists = true;
-                    alert.setText("Kundennummer existiert bereits");
-                    break;
-                }
-            }
-            if(!exists) {
-                if (hash.fuegeEin(schluessel1, wert1) == -1) {
+
+         int temp = hash.fuegeEin(schluessel1, wert1);
+
+                if (temp == -1) {
                     alert.setText("Array Voll");
+                } else if (temp == -2) {
+                    alert.setText("Kundennummer existiert bereits");
                 } else {
                     alert.setText("Gespeichert");
                     kText.setText("");
@@ -86,6 +82,8 @@ public class GuiHash extends JFrame implements ActionListener {
                 }
                 System.out.println(Arrays.toString(hash.getSchluessel()));
                 System.out.println(Arrays.toString(hash.getWert()));
+            } catch (NumberFormatException f){
+                alert.setText("Geben Sie nur Zahlen ein");
             }
         });
 

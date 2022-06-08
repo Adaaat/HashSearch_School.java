@@ -47,7 +47,12 @@ public class HashSuche {
         if (arrayfull()) {
             System.out.println("Array is full");
             return -1;
-        } else {
+        }
+            if(suchePos(pSchluessel)!=-1){
+                System.out.println("Schlüssel existiert bereits");
+                return -2;
+            }
+
             if (schluessel[berechneHash(pSchluessel)] == 0) {
                 schluessel[berechneHash(pSchluessel)] = pSchluessel;
                 wert[berechneHash(pSchluessel)] = pWert;
@@ -65,7 +70,7 @@ public class HashSuche {
             }
             return temp;
         }
-    }
+
     public double[] getWert(){
         return wert;
     }
